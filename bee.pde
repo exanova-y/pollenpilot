@@ -4,10 +4,10 @@ class Bee {
     PVector acceleration;
     PVector pbest;
     Flower closestFlower; // class attribute
-    //float flowerDistance; // a scalar
+    //float flowerDistance
 
 
-    // Constants for bee's behavior
+    // Constants for bee behaviour
     float maxForce = 0.5; // Maximum steering force
     float maxSpeed = 2;   // Maximum speed
     float sniffDistance = 300; // the distance at which the bee smells the flower
@@ -38,7 +38,7 @@ class Bee {
           
           
           if (distToFlower < pollinateDistance) {
-            pollinate();
+          pollinate();
           }
           
         }
@@ -51,7 +51,7 @@ class Bee {
     }
     
     Flower findClosestFlower(Flower[] flowers){
-      float recordDist = 2000; // very high value
+      float recordDist = 2000; // some very high value
       Flower closest = null;
       for (Flower flower : flowers){
         float d = PVector.dist(position, flower.position);
@@ -64,14 +64,14 @@ class Bee {
     }
     
     void communicate() {
-        // Update global best if this bee has found a better solution
+        // Update global best if this bee has found a better solution/closer flower
         if (closestFlower != null && distanceToFlower(position, closestFlower) < distanceToFlower(gbest, closestFlower)) {
             gbest = position.copy();
         }
     }
 
     void applyForce(PVector force) {
-        // This function could be more complex if you want to limit the force
+        // can add force limits later
         acceleration.add(force);
     }
 
@@ -90,6 +90,8 @@ class Bee {
         position.add(velocity);
         // Reset acceleration to 0 each cycle
         acceleration.mult(0);
+        
+        // check bounds
         if (position.x > width || position.x < 0){
           velocity.x *= -1;
         }
@@ -99,7 +101,7 @@ class Bee {
         }
         
         
-        // Implement bounds checking and wrap around if necessary
+     
     }
 
     void display() {
@@ -107,5 +109,5 @@ class Bee {
         ellipse(position.x, position.y, 5, 5); // Draw the bee
     }
 
-    // Additional helper methods like distanceToFlower and findClosestFlower
+    // more functions??
 }
