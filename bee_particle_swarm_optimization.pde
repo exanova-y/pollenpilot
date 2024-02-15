@@ -1,7 +1,7 @@
 // define constants
 int NUM_FLOWERS = 100;
 int NUM_BEES = 50;
-float EXPLORE_EXPLOIT_RATIO = 0.1; // Ratio controlling exploration vs. exploitation
+float EXPLORE_EXPLOIT_RATIO = 0.1;
 
 PVector gbest;
 
@@ -41,4 +41,4 @@ void draw() {
     }
 }
 
-// improvement: bees yellow.  on the screen.  add legend. more cross pollination maybe
+// notes: bees on the screen. add legend. more cross pollination maybe
