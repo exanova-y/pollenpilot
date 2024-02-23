@@ -12,6 +12,11 @@ class Bee {
     float maxSpeed = 2;   // Maximum speed
     float sniffDistance = 300; // the distance at which the bee smells the flower
     float pollinateDistance = 5;
+    
+    boolean allFlowersPollinated = false;
+    boolean stopAlgorithm = false;
+    float startTime;
+    float elapsedTime;
    
     Bee() {
         position = new PVector(random(width), random(height-50));
@@ -20,6 +25,14 @@ class Bee {
         pbest = position.copy();
     }
     
+    boolean checkAllFlowersPollinated() {
+        for (Flower flower : flowers) {
+            if (!flower.visited) {
+                return false; // If any flower is not visited, return false
+            }
+        }
+        return true; // All flowers are visited
+    }
     void explore() {
         // Add some randomness to the velocity for exploration
         velocity.add(PVector.random2D().mult(EXPLORE_EXPLOIT_RATIO));
@@ -38,8 +51,15 @@ class Bee {
           
           
           if (distToFlower < pollinateDistance) {
-          pollinate();
-          }
+                pollinate();
+                allFlowersPollinated = checkAllFlowersPollinated();
+                if (allFlowersPollinated) {
+                    elapsedTime = millis() - startTime; // Calculate the elapsed time
+                    println("Time taken: " + elapsedTime + " milliseconds");
+                    println("1 flower is pollinated in " + (elapsedTime/NUM_FLOWERS) + " milliseconds");
+                    stopAlgorithm = true; // Stop the algorithm
+                }
+            }
           
         }
     }
