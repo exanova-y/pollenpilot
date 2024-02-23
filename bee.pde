@@ -12,6 +12,11 @@ class Bee {
     float maxSpeed = 2;   // Maximum speed
     float sniffDistance = 300; // the distance at which the bee smells the flower
     float pollinateDistance = 5;
+    
+    // These constraints need to be all satisfied, to simulate the bee behaviour before recharging
+    float maxDistance = 5000; // assume that each bee can fly for 5000 meters it needs to be recharged
+    float maxTime = 30; // 30 minutes 
+    float maxEnergy = 22; // 22 Joules
    
     Bee() {
         position = new PVector(random(width), random(height-50));
